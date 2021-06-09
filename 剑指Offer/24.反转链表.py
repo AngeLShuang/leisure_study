@@ -28,9 +28,9 @@ class Solution(object):
         cur, pre = head, None
         while cur:
             tmp = cur.next  # 暂存后继节点 cur.next
-            cur.next = pre  # 修改 next 引用指向
-            pre = cur  # pre 暂存 cur
-            cur = tmp  # cur 访问下一节点
+            cur.next = pre  # 修改next引用指向
+            pre =cur # pre 暂存 cur
+           cur= tmp  #cur访问下一节点
         return pre
 
 
@@ -40,9 +40,9 @@ class Solution(object):
 考虑使用递归法遍历链表，当越过尾节点后终止递归，在回溯时修改各节点的next引用指向。
 
 recur(cur, pre) 递归函数：
-1.终止条件：当 cur 为空，则返回尾节点 pre （即反转链表的头节点）；
+1.终止条件：当cur为空，则返回尾节点 pre （即反转链表的头节点）；
 2.递归后继节点，记录返回值（即反转链表的头节点）为 res ；
-3.修改当前节点 cur 引用指向前驱节点 pre ；
+3.修改当前节点cur引用指向前驱节点 pre ；
 4.返回反转链表的头节点 res ；
 
 reverseList(head) 函数：  ../static/24.png
