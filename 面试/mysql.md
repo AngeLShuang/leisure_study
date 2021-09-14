@@ -33,3 +33,21 @@ set global long_query_time = 1; # 超过1秒的语句被定义为慢语句
 如果是因为没走索引，就要建合适的索引
 如果是因为数据表太大，即使走了索引也依然很慢，这时要考虑分表
 ```
+
+### 查询每个公司最早发行的文章
+```
+SELECT
+ t.*
+FROM
+ (
+  SELECT
+   company,
+   max(create_time) AS create_time
+  FROM
+   test
+  GROUP BY
+   company
+ ) a
+LEFT JOIN test t ON t.company = a.company
+AND t.create_time = a.create_time
+```
