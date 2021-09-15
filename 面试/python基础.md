@@ -2,7 +2,9 @@
 ```
 赋值：对象的引用
 浅拷贝：没有拷贝子对象，原始数据改变，子对象会改变
-深拷贝：完全拷贝了父对象及其子对象
+深拷贝：增加一个指针并且开辟了新的内存，这个增加的指针指向这个新的内存
+        把元素内部的元素完全进行拷贝复制.,不会产生一个改变另一个跟着改变的问题
+
 ```
 
 ### Django和Flask
@@ -51,6 +53,7 @@ class Fib():
         else:
             raise StopIteration
    可迭代对象的__iter__用于实例化一个迭代器对象，而迭代器中的__iter__用于返回迭代器本身，与__next__共同完成迭代器的迭代作用。
+   总结：1. 省内存 -> 生成器  2. 惰性机制  3. 只能向前. 不能反复
 3.生成器:生成器是一种特殊的迭代器，它不需要再像上面的类一样写__iter__()和__next__()方法了，只需要一个yiled关键字。
   生成器特殊的地方在于函数体中没有return关键字，函数的返回值是一个生成器对象。当执行f=fib()返回的是一个生成器对象，此时函数体中的代码并不会执行，只有显示或隐示地调用next的时候才会真正执行里面的代码。
 def fib(max):
@@ -61,4 +64,29 @@ def fib(max):
         n += 1
    生成器仅仅保存了一套生成数值或者对象的算法, 并且没有让这个算法现在就开始执行, 而是什么时候调它, 什么时候开始计算一个新的值, 并返回.
    存储海量的数据会占用内存资源, 如果什么时候需要的时候就去生成, 这样将极大地减少内存占用.
+```
+
+### 内置函数
+```
+1. lamda匿名函数
+    zed= lambda a,b : a+b 
+    ret=zed(2,3)
+2. sorted()排序函数   sorted(Iterable, key=None, reverse=False)  key:排序规则 reverse=True正序
+    d = {'c':1,'e':5,'b':7}
+    sorted(d.items(), key=lambda d:d[1], reverse=True) 
+3. filter()筛选函数   filter(function. Iterable)
+    lst = [23, 28, 15, 27, 24, 22]
+    print(list(filter(lambda age:age >18 and age % 2 ==0,lst)))
+    用来筛选的函数, 在filter中会自动的把iterable中的元素传递给function. 然后根据function返回的True或者False来判断是否保留此项数据
+4. map()映射函数       map(function, iterable)
+    lst1 = [1, 2, 3, 4, 5] 
+    lst2 = [2, 4, 6, 8, 10] 
+    print(list(map(lambda x, y: x + y , lst1, lst2)))
+    对可迭代对象中的每一个元素进行映射,分别取执行function
+5. reduce()累计函数    reduce(function, iterable)
+    from functools import reduce
+    print(reduce(lambda x,y:x+y, [1,2,3,4]))
+    对于序列里面的所有内容进行累计操作
+    
+应用场景:一般定义调用一次
 ```
